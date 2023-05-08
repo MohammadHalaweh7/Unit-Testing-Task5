@@ -1,16 +1,17 @@
 const filterNumbers = (numbers) => {
-  return numbers
-    .split("+")
-    .map((ele) => parseInt(ele))
-    .filter((ele) => ele <= 1000);
+  return numbers.split("+").map(Number);
+};
+
+const removeThousands = (numbers) => {
+  return numbers.filter((num) => num <= 1000);
 };
 
 const add = (numbers) => {
-  if (numbers === undefined || numbers === "") {
+  if (!numbers) {
     return 0;
   }
 
-  const numFilteredArrayAllowed = filterNumbers(numbers);
+  const numFilteredArrayAllowed = removeThousands(filterNumbers(numbers));
 
   const negativeNumbersArray = numFilteredArrayAllowed.filter((num) => num < 0);
   if (negativeNumbersArray.length > 0) {
@@ -26,7 +27,7 @@ const add = (numbers) => {
 };
 
 const addMultiple = (numbers) => {
-  const numFilteredArrayAllowed = filterNumbers(numbers);
+  const numFilteredArrayAllowed = removeThousands(filterNumbers(numbers));
 
   if (numFilteredArrayAllowed.length > 2) {
     throw new Error("Support up to 2 numbers only");
